@@ -49,3 +49,51 @@
       padding: 0.7em 1.5em;
       border-radius: 6px;
       font-size: 1em;
+      font-weight: bold;
+      cursor: pointer;
+      color: black;
+    }
+
+    #btnGo:hover {
+      background-color: rgb(255, 210, 40);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Peep Unblocker</h1>
+
+  <div class="input-container">
+    <input id="txtURL" type="text" value="youtube.com" autofocus>
+    <button id="btnGo">Search</button>
+  </div>
+
+  <script>
+    const btnGo = document.getElementById("btnGo");
+    const txtURL = document.getElementById("txtURL");
+
+    function rewriteGoogleToBing(url) {
+      if (url.includes("google")) {
+        return url.replace(/google/g, "bing");
+      }
+      return url;
+    }
+
+    btnGo.onclick = function() {
+      const text = txtURL.value.trim();
+      if (text) {
+        let url = './-----' + text;
+        url = rewriteGoogleToBing(url);
+        open(url, '_blank', 'noopener,noreferrer');
+      }
+    };
+
+    txtURL.onkeypress = function(e) {
+      if (e.keyCode === 13) {
+        btnGo.onclick();
+      }
+    };
+  </script>
+
+</body>
+</html>
