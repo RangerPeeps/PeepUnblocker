@@ -68,12 +68,20 @@ jsproxy_config({
     'https://www.pornhub.com/': {
       redir: 'https://www.google.com'
     },
-    // Change the default search engine to Bing
-    'https://www.google.com/search': {
-      redir: 'https://www.bing.com/search'
-    },
     'http://haha.com/': {
       content: 'Hello World'
     },
+    // New rule to replace Google search with Bing search
+    'https://www.google.com/search?q=': {
+      redir: (url) => {
+        let newUrl = url.replace('https://www.google.com/search?q=', 'https://www.bing.com/search?q=');
+        return new Response('', {
+          status: 302,
+          headers: {
+            'Location': newUrl
+          }
+        });
+      }
+    }
   }
 })
