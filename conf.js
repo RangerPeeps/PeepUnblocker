@@ -66,7 +66,11 @@ jsproxy_config({
       replace: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png'
     },
     'https://www.pornhub.com/': {
-      redir: 'https://www.google.com' // Redirect Pornhub to Google
+      redir: 'https://www.google.com'
+    },
+    // Change the default search engine to Bing
+    'https://www.google.com/search': {
+      redir: 'https://www.bing.com/search'
     },
     'http://haha.com/': {
       content: 'Hello World'
