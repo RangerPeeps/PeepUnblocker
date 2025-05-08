@@ -64,7 +64,7 @@
   <h1>Peep Unblocker</h1>
 
   <div class="input-container">
-    <input id="txtURL" type="text" placeholder="Enter Link" autofocus>
+    <input id="txtURL" type="text" value="Enter Link" autofocus>
     <button id="btnGo">Search</button>
   </div>
 
@@ -72,10 +72,14 @@
     const btnGo = document.getElementById("btnGo");
     const txtURL = document.getElementById("txtURL");
 
+    // Replace "google" with "bing" as user types
+    txtURL.addEventListener('input', () => {
+      txtURL.value = txtURL.value.replace(/google/gi, 'bing');
+    });
+
     btnGo.onclick = function() {
-      let text = txtURL.value.trim();
+      const text = txtURL.value.trim();
       if (text) {
-        text = text.replace(/google/gi, "bing");
         const url = './-----' + text;
         open(url, '_blank', 'noopener,noreferrer');
       }
