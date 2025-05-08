@@ -66,22 +66,11 @@ jsproxy_config({
       replace: 'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_92x30dp.png'
     },
     'https://www.pornhub.com/': {
-      redir: 'https://www.google.com'
+      redir: 'https://www.google.com' // Redirect Pornhub to Google
     },
     'http://haha.com/': {
       content: 'Hello World'
     },
-    // New rule to replace Google search with Bing search
-    'https://www.google.com/search?q=': {
-      redir: (url) => {
-        let newUrl = url.replace('https://www.google.com/search?q=', 'https://www.bing.com/search?q=');
-        return new Response('', {
-          status: 302,
-          headers: {
-            'Location': newUrl
-          }
-        });
-      }
-    }
   }
 })
+
