@@ -20,6 +20,15 @@
       min-height: 100vh;
     }
 
+    #logo {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 80px;
+      height: auto;
+      z-index: 1000;
+    }
+
     h1 {
       color: rgb(252, 194, 3);
       margin-top: 2.5em;
@@ -125,11 +134,14 @@
 </head>
 <body>
 
+  <!-- Persistent Logo -->
+  <img id="logo" src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/PeepGrey.jpg" alt="Peep Logo">
+
   <h1>PEEP UNBLOCKER</h1>
 
   <div class="input-container">
     <input id="txtURL" type="text" value="Enter Link" autofocus>
-    <button id="btnGo">Search</button>
+    <button id="btnGo">Unblock</button>
   </div>
 
   <div id="warning">Unfortunately google does not work with this unblocker, use "bing.com" instead!</div>
