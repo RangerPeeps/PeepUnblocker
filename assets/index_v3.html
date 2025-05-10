@@ -3,68 +3,65 @@
 <head>
   <title>Peep Unblocker</title>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
   <link rel="icon" type="image/png" href="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/RangerPeeps%20Transparent.png">
   <style>
     body {
+      background-color: rgb(64, 64, 64);
       margin: 0;
       padding: 0;
       font-family: Arial, sans-serif;
-      background-color: rgb(64, 64, 64);
       color: white;
-      overflow: hidden;
-    }
-
-    #app-container {
       display: flex;
       flex-direction: column;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    #header {
-      background-color: rgb(64, 64, 64);
-      display: flex;
       align-items: center;
-      padding: 0.75em 1em;
-      gap: 1em;
+      justify-content: flex-start;
+      min-height: 100vh;
     }
 
     #logo {
-      height: 50px;
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      width: 80px;
+      height: auto;
+      z-index: 1000;
     }
 
     h1 {
-      margin: 0;
       color: rgb(252, 194, 3);
-      font-size: 1.8em;
+      margin-top: 2.5em;
+      margin-bottom: 1em;
+      font-size: 3em;
       text-transform: uppercase;
     }
 
-    #controls {
+    .input-container {
       display: flex;
+      justify-content: center;
       align-items: center;
+      margin-bottom: 0.75em;
       gap: 0.5em;
-      margin-left: auto;
     }
 
     #txtURL {
-      width: 300px;
-      height: 2em;
+      width: 480px;
+      height: 2.5em;
       padding: 0 1em;
-      border-radius: 5px;
       border: none;
-      font-size: 1em;
+      border-radius: 6px;
+      font-size: 1.1em;
     }
 
     #btnGo {
       background-color: rgb(252, 194, 3);
-      color: black;
-      font-weight: bold;
-      padding: 0.5em 1em;
       border: none;
-      border-radius: 5px;
+      padding: 0.75em 1.8em;
+      border-radius: 6px;
+      font-size: 1.1em;
+      font-weight: bold;
       cursor: pointer;
+      color: black;
     }
 
     #btnGo:hover {
@@ -72,37 +69,35 @@
     }
 
     #warning {
-      text-align: center;
-      background: rgb(252, 194, 3);
-      color: black;
-      padding: 0.5em;
+      color: rgb(255, 210, 40);
+      font-size: 1em;
+      margin-top: 0.5em;
       display: none;
-    }
-
-    #main {
-      flex-grow: 1;
-      display: flex;
-    }
-
-    #sidebar {
-      width: 220px;
-      padding: 1em;
-      overflow-y: auto;
-      background-color: rgb(54, 54, 54);
-      border-right: 2px solid rgb(252, 194, 3);
+      max-width: 80%;
+      text-align: center;
+      transition: opacity 0.5s;
     }
 
     .section-title {
-      font-weight: bold;
-      margin-bottom: 0.5em;
-      font-size: 1.1em;
       color: rgb(252, 194, 3);
+      font-size: 1.5em;
+      margin-top: 2em;
+      margin-bottom: 0.3em;
+    }
+
+    .divider {
+      width: 400px;
+      height: 1px;
+      background-color: rgb(252, 194, 3);
+      margin-bottom: 1em;
     }
 
     .site-buttons {
       display: flex;
+      justify-content: center;
+      gap: 1.5em;
+      margin-bottom: 1em;
       flex-wrap: wrap;
-      gap: 0.75em;
     }
 
     .site-button {
@@ -123,95 +118,106 @@
       object-fit: contain;
     }
 
-    #viewer {
-      flex-grow: 1;
-      border: none;
-      width: 100%;
+    .site-button-white {
+      background-color: white;
+    }
+
+    .footer-note {
+      font-size: 1em;
+      margin-top: 0.75em;
+      color: rgb(252, 194, 3);
+      text-align: center;
+      max-width: 80%;
     }
   </style>
 </head>
 <body>
 
-  <div id="app-container">
-    <div id="header">
-      <img id="logo" src="https://github.com/RangerPeeps/PeepUnblocker/blob/gh-pages/assets/PeepGrey.jpg" alt="Logo">
-      <h1>PEEP UNBLOCKER</h1>
-      <div id="controls">
-        <input id="txtURL" type="text" value="Enter Link">
-        <button id="btnGo">Search</button>
-      </div>
+  <!-- Persistent Logo -->
+  <img id="logo" src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/PeepGrey.jpg" alt="Peep Logo">
+
+  <h1>PEEP UNBLOCKER</h1>
+
+  <div class="input-container">
+    <input id="txtURL" type="text" value="Enter Link" autofocus>
+    <button id="btnGo">Search</button>
+  </div>
+
+  <div id="warning">Unfortunately google does not work with this unblocker, use "bing.com" instead!</div>
+
+  <div class="section-title">Popular Sites</div>
+  <div class="divider"></div>
+
+  <div class="site-buttons">
+    <div class="site-button" onclick="setURL('youtube.com')">
+      <img src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/youtubelogo.png" alt="YouTube">
     </div>
-
-    <div id="warning">Unfortunately google does not work with this unblocker, use "bing.com" instead!</div>
-
-    <div id="main">
-      <div id="sidebar">
-        <div class="section-title">Popular Sites</div>
-        <div class="site-buttons">
-          <div class="site-button" onclick="navigate('youtube.com')">
-            <img src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/youtubelogo.png" alt="YouTube">
-          </div>
-          <div class="site-button" onclick="navigate('reddit.com')">
-            <img src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/reddit.png" alt="Reddit">
-          </div>
-          <div class="site-button" onclick="navigate('coolmathgames.com')">
-            <img src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/coolmathgames.png" alt="CoolMathGames">
-          </div>
-          <div class="site-button" onclick="navigate('crazygames.com')">
-            <img src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/crazygames.jpg" alt="CrazyGames">
-          </div>
-          <div class="site-button" onclick="navigate('spotify.com')">
-            <img src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/spotify.png" alt="Spotify">
-          </div>
-          <div class="site-button" onclick="navigate('discord.com')">
-            <img src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/discord.png" alt="Discord">
-          </div>
-          <div class="site-button" onclick="navigate('netflix.com')">
-            <img src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/netflix.png" alt="Netflix">
-          </div>
-          <div class="site-button" onclick="navigate('1v1.lol')">
-            <img src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/1v1-lol.jpg" alt="1v1.lol">
-          </div>
-        </div>
-      </div>
-
-      <iframe id="viewer" name="proxy-frame"></iframe>
+    <div class="site-button" onclick="setURL('reddit.com')">
+      <img src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/reddit.png" alt="Reddit">
+    </div>
+    <div class="site-button" onclick="setURL('coolmathgames.com')">
+      <img src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/coolmathgames.png" alt="CoolMathGames">
+    </div>
+    <div class="site-button" onclick="setURL('crazygames.com')">
+      <img src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/crazygames.jpg" alt="CrazyGames">
     </div>
   </div>
 
-  <script>
-    const txtURL = document.getElementById("txtURL");
-    const btnGo = document.getElementById("btnGo");
-    const viewer = document.getElementById("viewer");
-    const warning = document.getElementById("warning");
+  <div class="divider"></div>
+  
+  <div class="site-buttons">
+    <div class="site-button site-button-white" onclick="setURL('spotify.com')">
+      <img src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/spotify.png" alt="Spotify">
+    </div>
+    <div class="site-button site-button-white" onclick="setURL('discord.com')">
+      <img src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/discord.png" alt="Discord">
+    </div>
+    <div class="site-button" onclick="setURL('netflix.com')">
+      <img src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/netflix.png" alt="Netflix">
+    </div>
+    <div class="site-button" onclick="setURL('1v1.lol')">
+      <img src="https://github.com/RangerPeeps/PeepUnblocker/raw/gh-pages/assets/1v1-lol.jpg" alt="1v1.lol">
+    </div>
+  </div>
 
+  <div class="divider"></div>
+  <div class="footer-note">Unblock any website by searching it in the bar above.</div>
+
+  <script>
+    const btnGo = document.getElementById("btnGo");
+    const txtURL = document.getElementById("txtURL");
+    const warning = document.getElementById("warning");
     let warningTimeout;
 
-    function navigate(site) {
-      txtURL.value = site;
-      loadURL(site);
-    }
-
-    function loadURL(url) {
-      if (/google/i.test(url)) {
-        url = url.replace(/google/gi, 'bing');
+    txtURL.addEventListener('input', () => {
+      const value = txtURL.value;
+      if (/google/i.test(value)) {
+        txtURL.value = value.replace(/google/gi, 'bing');
         warning.style.display = 'block';
         clearTimeout(warningTimeout);
         warningTimeout = setTimeout(() => {
           warning.style.display = 'none';
         }, 3000);
       }
-      viewer.src = './-----' + url;
-    }
+    });
 
-    btnGo.onclick = function () {
+    btnGo.onclick = function() {
       const text = txtURL.value.trim();
-      if (text) loadURL(text);
+      if (text) {
+        const url = './-----' + text;
+        open(url, '_blank', 'noopener,noreferrer');
+      }
     };
 
-    txtURL.onkeypress = function (e) {
-      if (e.key === 'Enter') btnGo.click();
+    txtURL.onkeypress = function(e) {
+      if (e.keyCode === 13) {
+        btnGo.onclick();
+      }
     };
+
+    function setURL(site) {
+      txtURL.value = site;
+    }
   </script>
 
 </body>
